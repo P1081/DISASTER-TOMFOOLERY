@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="bg-container"></div>
+
+    <div class="vhs-scanlines"></div>
+
+    <div id="gradient-overlay"></div>
+
+    <div id="flash-overlay"></div>
+
+    <div id="loading-screen">
+        <div class="loading-box">
+            <h1 class="loading-text">LOADING STAGE...</h1>
+            <div class="pixel-progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <img id="game-logo" src="Images/Logo.PNG" alt="Game Title">
+
+    <div class="menu-container">
+        <button id="btn-play" class="menu-btn">PLAY</button>
+        <button id="btn-almanac" class="menu-btn">ALMANAC & HELP</button>
+    </div>
+
+    <div id="almanac-screen">
+        <div class="almanac-header">
+            <h2>SUBURBAN ALMANAC</h2>
+            <button id="almanac-close-btn" class="retro-back-btn">BACK TO MENU</button>
+        </div>
+        
+        <div class="almanac-content">
+            <div class="almanac-section">
+                <h3>STRUCTURES</h3>
+                <div class="almanac-grid">
+                    <div class="almanac-card" onclick="showAlmanacDetail('City', 'Images/City.png', 'The core of your operations. Provides the fundamental resources and infrastructure needed to sustain expansion.')">
+                        <img src="Images/City.png" alt="City"><span>City</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Village', 'Images/house.png', 'A basic residential settlement where your citizens reside and build community roots.')">
+                        <img src="Images/house.png" alt="Village"><span>Village</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Farm', 'Images/farm.png', 'Supplies critical food resources to the local village networks, accelerating your overall income stream.')">
+                        <img src="Images/farm.png" alt="Farm"><span>Farm</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Tree', 'Images/tree.png', 'Acts as a natural safety barrier. Strategically absorbs and blocks incoming floodwater currents.')">
+                        <img src="Images/tree.png" alt="Tree"><span>Tree</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Evacuation Center', 'Images/evacuation.png', 'Safely shields and houses displaced citizens as soon as an emergency crisis hits.')">
+                        <img src="Images/evacuation.png" alt="Evacuation"><span>Evacuation</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Hospital', 'Images/hospital.png', 'Handles emergency medical overflow, taking in citizens when evacuation space hits capacity.')">
+                        <img src="Images/hospital.png" alt="Hospital"><span>Hospital</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('School', 'Images/school.png', 'Educates your youth. Graduating students quickly join hospital networks as medical support staff.')">
+                        <img src="Images/school.png" alt="School"><span>School</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Hotel', 'Images/hotel.png', 'An upscale residential alternative to standard village housing, providing higher revenue yields.')">
+                        <img src="Images/hotel.png" alt="Hotel"><span>Hotel</span>
+                    </div>
+                    <div class="almanac-card" onclick="showAlmanacDetail('Trash Pile', 'Images/trash.png', 'Leftovers abandoned by citizens. Must be cleaned up instantly to prevent environmental penalties.')">
+                        <img src="Images/trash.png" alt="Trash"><span>Trash</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="almanac-preview-box">
+                <div id="almanac-preview-img-wrap">
+                    <img id="almanac-display-img" src="Images/Logo.PNG" alt="Select Item">
+                </div>
+                <h4 id="almanac-display-title">Select Entry</h4>
+                <p id="almanac-display-desc">Click on any structure or disaster card around the index grid layout to view technical tactical field records.</p>
+            </div>
+
+            <div class="almanac-section">
+                <h3>DISASTERS</h3>
+                <div class="almanac-grid">
+                    <div class="almanac-card disaster-card" onclick="showAlmanacDetail('Flood', 'Images/Flooded.gif', 'Rivers overflow their boundaries rapidly, expanding outwards and growing larger over time.')">
+                        <img src="Images/Flooded.gif" alt="Flood"><span>Flood</span>
+                    </div>
+                    <div class="almanac-card disaster-card" onclick="showAlmanacDetail('Earthquake', 'Images/Earthquake.gif', 'Violent seismic shifts rock the entire game board. Structures take severe heavy damage.')">
+                        <img src="Images/Earthquake.gif" alt="Earthquake"><span>Earthquake</span>
+                    </div>
+                    <div class="almanac-card disaster-card" onclick="showAlmanacDetail('Volcanic Eruption', 'Images/AshFall.gif', 'Creates massive ashfall across randomized coordinates. Stay vigilant and track air qualities.')">
+                        <img src="Images/AshFall.gif" alt="Volcano"><span>Volcano</span>
+                    </div>
+                    <div class="almanac-card disaster-card" onclick="showAlmanacDetail('???', 'Images/giphy.gif', '???')">
+                        <div class="mystery-box">?</div><span>???</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="meme-flash-container"></div>
+    <audio id="thunder-sound" src="sounds/vine-boom.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

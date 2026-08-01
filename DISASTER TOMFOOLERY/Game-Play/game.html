@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Your Land + PvZ Core Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="viewport">
+        <div id="camera-space">
+            <div id="map-island"></div>
+        </div>
+    </div>
+
+    <div id="intro-overlay" class="intro-overlay">
+        <div class="intro-card no-border">
+            <div class="intro-center">
+                <div id="intro-text" class="intro-text">HAHAHAHAHAHA</div>
+            </div>
+            <div class="intro-right">
+                <img id="intro-image-primary" src="images/corcsDL.png" alt="Corcs DL" class="intro-image">
+                <img id="intro-image-alt" src="images/corcsDI.png" alt="Corcs DI" class="intro-image hidden">
+            </div>
+            <div class="intro-bottom">
+                <button id="intro-action-btn" class="intro-action-btn">Click to continue</button>
+            </div>
+        </div>
+    </div>
+    <div id="flash-overlay" class="flash-overlay"></div>
+    <div id="warning-alert" class="warning-alert hidden">WARNING<br>Possible disaster: ?</div>
+    <div id="toast-notification" class="toast-hidden">Toast notification</div>
+    <div id="volcano-overlay" class="volcano-overlay"></div>
+
+    <div id="cash-indicators-container"></div>
+
+    <div id="game-over-screen" class="game-over-screen" style="display:none;">
+        <div class="game-over-card">
+            <h1>GAME OVER</h1>
+            <div id="game-over-waves" class="game-over-waves">Waves survived: 0</div>
+            <button id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <div id="city-modal-overlay">
+        <div id="city-modal-container">
+
+            <div id="modal-left-panel">
+                <div class="panel-header-bar">
+                    <span id="left-panel-header-title" class="panel-title-text">Details</span>
+                    <div class="window-controls">
+                        <button class="win-btn">-</button>
+                        <button class="win-btn close-modal-btn">X</button>
+                    </div>
+                </div>
+                <div class="panel-content-body">
+                    <h2 id="modal-title">TITLE</h2>
+                    <h3 id="modal-level">Lvl 1</h3>
+                    <p id="modal-status">Status :></p>
+                    <button id="modal-upgrade-btn" class="left-panel-upgrade-btn">Upgrade: ??? pesos</button>
+                </div>
+            </div>
+
+            <div id="modal-right-panel">
+                <div class="panel-header-bar">
+                    <span id="right-panel-header-title" class="panel-title-text">Content Board</span>
+                    <div class="window-controls">
+                        <button class="win-btn">-</button>
+                        <button class="win-btn close-modal-btn">X</button>
+                    </div>
+                </div>
+                <div class="panel-content-body">
+
+                    <div id="shop-view-wrapper">
+                        <div class="shop-tier-section">
+                            <div class="tier-label-banner">Lvl 1 Structures</div>
+                            <div class="shop-items-flex-row">
+                                <div class="shop-item-card" id="buy-village-btn">
+                                    <img src="images/house.png" alt="Village" class="shop-card-img-asset">
+                                    <div class="card-title">Village</div>
+                                    <div class="card-cost-tag">50 ₱</div>
+                                </div>
+                                <div class="shop-item-card" id="buy-farm-btn">
+                                    <img src="images/farm.png" alt="Farm" class="shop-card-img-asset">
+                                    <div class="card-title">Farm</div>
+                                    <div class="card-cost-tag">10 ₱</div>
+                                </div>
+                                <div class="shop-item-card" id="buy-tree-btn">
+                                    <img src="images/tree.png" alt="Forest" class="shop-card-img-asset">
+                                    <div class="card-title">Forest</div>
+                                    <div class="card-cost-tag">10 ₱</div>
+                                </div>
+                                <div class="shop-item-card" id="buy-evacuation-btn">
+                                    <img src="images/evacuation.png" alt="Evacuation" class="shop-card-img-asset">
+                                    <div class="card-title">Evacuation</div>
+                                    <div class="card-cost-tag">100 ₱</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shop-tier-section locked-tier" id="shop-tier-2-group">
+                            <div class="tier-label-banner" id="tier-2-banner-title">Lvl 2 Structures (Locked)</div>
+                            <div class="shop-items-flex-row">
+                                <div class="shop-item-card" id="buy-hotel-btn">
+                                    <img src="images/hotel.png" alt="Hotel" class="shop-card-img-asset">
+                                    <div class="card-title">Hotel</div>
+                                    <div class="card-cost-tag">250 ₱</div>
+                                </div>
+                                <div class="shop-item-card" id="buy-hospital-btn">
+                                    <img src="images/hospital.png" alt="Hospital" class="shop-card-img-asset">
+                                    <div class="card-title">Hospital</div>
+                                    <div class="card-cost-tag">150 ₱</div>
+                                </div>
+                                <div class="shop-item-card" id="buy-school-btn">
+                                    <img src="images/school.png" alt="School" class="shop-card-img-asset">
+                                    <div class="card-title">School</div>
+                                    <div class="card-cost-tag">120 ₱</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="house-stats-view-wrapper" style="display: none;">
+                        <div class="stats-display-container">
+                            <img id="stats-preview-img-frame" src="images/house2.jpg" alt="Structure Preview" class="stats-preview-img-frame">
+                            <div id="stats-people-label" class="stats-badge-text-field">People Count: ???</div>
+                            <div id="stats-status-label" class="stats-status-text-field">Status: :></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="bottom-ui-anchored-wrapper">
+        <div id="hud-resources-tracker-bar">
+            <div id="corcs-cash-overlay" onclick="handleCorcsClick()">
+                <img src="images/Corcs.png" alt="Corcs Asset Container">
+            </div>
+            <div class="hud-stat-badge">💰 Cash: <span id="stat-cash">100</span>₱</div>
+            <div class="hud-stat-badge">🧑 People: <span id="stat-people">0</span></div>
+            <div class="hud-stat-badge">🌊 Wave: <span id="stat-wave">1</span></div>
+        </div>
+        <div id="inventory-hotbar">
+            <div class="empty-slot-placeholder-text">Inventory Empty - Open City Shop</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,404 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Background canvas zoomed to fit screen layout */
+#bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Images/City.gif');
+    background-size: contain; 
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.20); /* Zoom factor */
+    z-index: 1;
+}
+
+/* Retro CRT Television Scanline Effect */
+.vhs-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Left side ambient color-fade panel */
+#gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    transition: background 0.4s ease;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Lightning strobe flash layer */
+#flash-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.thunder-flash {
+    animation: flashAnim 0.25s steps(2, end);
+}
+
+@keyframes flashAnim {
+    0% { opacity: 0; }
+    25% { opacity: 0.85; }
+    50% { opacity: 0.1; }
+    75% { opacity: 0.7; }
+    100% { opacity: 0; }
+}
+
+/* Logo pinned strictly to the Top Left */
+#game-logo {
+    position: absolute;
+    top: 30px;
+    left: 4%;
+    width: 400px;
+    height: auto;
+    image-rendering: pixelated;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    z-index: 10;
+}
+
+#game-logo:active {
+    transform: scale(0.96);
+}
+
+/* Buttons vertically centered on the left side */
+.menu-container {
+    position: absolute;
+    left: 4%;
+    top: 55%; 
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+}
+
+/* 8-Bit Styled Button Layout */
+.menu-btn {
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 16px 24px;
+    cursor: pointer;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: left;
+    width: 320px;
+    border: 4px solid #ffffff;
+    outline: none;
+    image-rendering: pixelated;
+    box-shadow: 0 6px 0 #333333;
+    position: relative;
+}
+
+.menu-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 6px 0 #aaaaaa;
+    top: -2px;
+}
+
+.menu-btn:active {
+    top: 4px;
+    box-shadow: 0 2px 0 #333333;
+}
+
+/* Center-screen Pop Container for Meme Easter Egg */
+#meme-flash-container {
+    position: fixed;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    z-index: 5; 
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-out; 
+}
+
+#meme-flash-container img {
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Trigger class added instantly via JavaScript */
+#meme-flash-container.flash-active {
+    opacity: 1;
+    transition: none; 
+}
+
+/* ==========================================================================
+   PVZ STYLE ALMANAC LAYOUT INTERFACE
+   ========================================================================= */
+
+#almanac-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.94); /* Solid opaque backdrop */
+    z-index: 100;
+    display: none; /* Managed by JS flag switches */
+    flex-direction: column;
+    padding: 30px;
+    color: #ffffff;
+}
+
+.almanac-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px dashed #ffffff;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.almanac-header h2 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #ffff00;
+}
+
+.retro-back-btn {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: 3px solid white;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #880000;
+}
+
+.retro-back-btn:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 4px 0 #888888;
+}
+
+.almanac-content {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    height: calc(100% - 100px);
+}
+
+.almanac-section {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 4px solid #ffffff;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.almanac-section h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+}
+
+.almanac-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 12px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.almanac-card {
+    background: #000000;
+    border: 2px solid #555555;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.1s, border-color 0.1s;
+}
+
+.almanac-card:hover {
+    border-color: #ffff00;
+    transform: scale(1.05);
+    background: #111111;
+}
+
+.almanac-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin-bottom: 6px;
+}
+
+.almanac-card span {
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: block;
+    word-break: break-word;
+}
+
+.disaster-card {
+    border-color: #880000;
+}
+.disaster-card:hover {
+    border-color: #ff0000;
+}
+
+.mystery-box {
+    width: 50px;
+    height: 50px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ff0000;
+    font-weight: bold;
+    border: 2px dashed #ff0000;
+    margin-bottom: 6px;
+}
+
+.almanac-preview-box {
+    width: 320px;
+    background: #111111;
+    border: 4px solid #ffff00;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#almanac-preview-img-wrap {
+    width: 140px;
+    height: 140px;
+    background: #000;
+    border: 3px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+#almanac-display-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+#almanac-display-title {
+    font-size: 1.3rem;
+    color: #ffff00;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    border-bottom: 2px dashed #333;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+#almanac-display-desc {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #cccccc;
+    font-family: monospace;
+}
+/* ==========================================================================
+   RETRO LOADING SCREEN CONTAINER STYLES
+   ========================================================================== */
+
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 200; /* Stays above every menu layer */
+    display: none; /* Managed by JS flag toggles */
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.loading-box {
+    text-align: center;
+    width: 450px;
+}
+
+.loading-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    color: #ffff00;
+    animation: blinkText 0.8s steps(2, start) infinite;
+}
+
+@keyframes blinkText {
+    to { visibility: hidden; }
+}
+
+/* 8-Bit Styled Progress Frame Wrapper */
+.pixel-progress-bar {
+    width: 100%;
+    height: 32px;
+    border: 4px solid #ffffff;
+    background-color: #000000;
+    padding: 4px;
+    position: relative;
+    image-rendering: pixelated;
+}
+
+/* Inner filled color bar metric */
+#progress-fill {
+    height: 100%;
+    width: 0%; /* Spans 0% up to 100% via JS interval handler timelines */
+    background-color: #ff0000; /* Crimson load fill status indicator */
+    transition: width 0.1s linear;
+}
